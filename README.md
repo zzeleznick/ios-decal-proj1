@@ -1,7 +1,7 @@
 # Project 1: To-Do List App
 
 ## Due
-Thursday, February 25 at 11:59 PM
+Tuesday, March 1 at 11:59 PM
 
 ## Description 
 In Project 1, you will build your own Utility app - a To-Do List.  As you would
