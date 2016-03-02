@@ -17,12 +17,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("MainVC did load")
+        // println("MainVC did load")
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     @IBAction func addTask(sender: UIBarButtonItem) {
-        println("Time to add a task!")
+        // println("Time to add a task!")
         goForward()
     }
     
@@ -58,6 +58,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // code
+        let now = NSDate()
+        let count = taskMgr.tasks.count
+        if count > 0 {
+            let allTasks = taskMgr.tasks
+            for (idx, element) in enumerate(allTasks) {
+                let created = element.created
+                if -(created.timeIntervalSinceNow) > 60*60*24 {
+                    taskMgr.deleteTask(idx)
+                }
+            }
+        }
         return taskMgr.tasks.count
     }
     
