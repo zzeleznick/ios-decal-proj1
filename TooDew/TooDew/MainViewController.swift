@@ -12,7 +12,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var tableTasks: UITableView!
     @IBOutlet weak var addTaskButton: UIBarButtonItem!
+    @IBOutlet weak var statsButton: UIBarButtonItem!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         println("MainVC did load")
@@ -21,10 +23,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func addTask(sender: UIBarButtonItem) {
         println("Time to add a task!")
+        goForward()
+    }
+    
+    @IBAction func userClickStats(sender: UIBarButtonItem) {
+        goBack()
+    }
+    
+    @IBAction func userSwipesRight(sender: UISwipeGestureRecognizer) {
+        goBack()
+    }
+    
+    func goBack() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let addTaskVC = storyboard.instantiateViewControllerWithIdentifier("RootAddTask")  as! UIViewController?
-        self.presentViewController(addTaskVC!, animated: true, completion: nil)
-        
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootStats")  as! UIViewController?
+        self.presentViewController(mainVC!, animated: true, completion: nil)
+    }
+    
+    func goForward() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootAddTask")  as! UIViewController?
+        self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

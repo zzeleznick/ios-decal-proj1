@@ -33,6 +33,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="pJ5-pV-V1K" secondAttribute="trailing" constant="6" id="2vE-Uo-UcG"/>
                             <constraint firstItem="pJ5-pV-V1K" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="2" id="OgS-5m-cWf"/>
@@ -40,9 +41,17 @@
                             <constraint firstAttribute="centerX" secondItem="pJ5-pV-V1K" secondAttribute="centerX" id="fQ5-FG-JF4"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="pJ5-pV-V1K" secondAttribute="bottom" constant="34" id="fvz-sE-ur3"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="72e-J7-zLc" appends="YES" id="0CJ-QA-3UY"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="All Tasks" id="PnV-J7-W3R">
+                        <barButtonItem key="leftBarButtonItem" title="Stats" id="cXa-DE-H6h">
+                            <connections>
+                                <action selector="userClickStats:" destination="vXZ-lx-hvc" id="bZI-ku-O7J"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TKq-BH-US1">
                             <connections>
                                 <action selector="addTask:" destination="vXZ-lx-hvc" id="iYJ-xE-7xs"/>
@@ -53,19 +62,25 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="addTaskButton" destination="TKq-BH-US1" id="6lc-7h-Peo"/>
+                        <outlet property="statsButton" destination="cXa-DE-H6h" id="WHk-VT-1C0"/>
                         <outlet property="tableTasks" destination="pJ5-pV-V1K" id="TjT-Nz-7wr"/>
-                        <segue destination="UPD-h0-19O" kind="presentation" identifier="MainToStats" id="Pug-F4-wxx"/>
+                        <segue destination="udf-2n-nU8" kind="presentation" identifier="MainToStats" id="Pug-F4-wxx"/>
                         <segue destination="A72-Kq-dXh" kind="presentation" identifier="MainToAdd" id="5E0-is-U2d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="72e-J7-zLc">
+                    <connections>
+                        <action selector="userSwipesRight:" destination="vXZ-lx-hvc" id="XbO-LC-afg"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1055" y="359"/>
         </scene>
         <!--VCStats-->
         <scene sceneID="dO3-vz-hD2">
             <objects>
-                <viewController storyboardIdentifier="VCStats" title="VCStats" id="UPD-h0-19O" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VCStats" title="VCStats" id="UPD-h0-19O" customClass="StatsController" customModule="TooDew" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eSm-N0-gba"/>
                         <viewControllerLayoutGuide type="bottom" id="fET-Wd-5uc"/>
@@ -73,14 +88,56 @@
                     <view key="view" contentMode="scaleToFill" id="7HI-Ut-vFr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Completed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmJ-bY-N6Z">
+                                <rect key="frame" x="128" y="128" width="156.5" height="26.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euD-ec-Noa">
+                                <rect key="frame" x="167" y="219" width="80" height="36"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="cmJ-bY-N6Z" firstAttribute="top" secondItem="7HI-Ut-vFr" secondAttribute="topMargin" constant="128" id="1rC-ua-X06"/>
+                            <constraint firstItem="euD-ec-Noa" firstAttribute="top" secondItem="cmJ-bY-N6Z" secondAttribute="bottom" constant="64.5" id="901-Hd-Fbc"/>
+                            <constraint firstAttribute="centerX" secondItem="cmJ-bY-N6Z" secondAttribute="centerX" id="Sq3-jQ-hKM"/>
+                            <constraint firstAttribute="centerX" secondItem="euD-ec-Noa" secondAttribute="centerX" id="ceh-7w-4ya"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="NX2-Vg-QSW" appends="YES" id="1VX-H7-j3S"/>
+                        </connections>
                     </view>
+                    <navigationItem key="navigationItem" title="Productivity Stats" id="db9-j4-klH">
+                        <barButtonItem key="leftBarButtonItem" title="Home" id="yOH-vT-Orj">
+                            <connections>
+                                <action selector="userClicksHome:" destination="UPD-h0-19O" id="zhw-8T-gPc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="homeButton" destination="yOH-vT-Orj" id="1DT-8r-aNj"/>
+                        <outlet property="numberCompleted" destination="euD-ec-Noa" id="2e4-ip-tKm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emE-K6-fkt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="NX2-Vg-QSW">
+                    <connections>
+                        <action selector="userSwipesLeft:" destination="UPD-h0-19O" id="ZwS-Ef-DkZ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1725" y="5"/>
+            <point key="canvasLocation" x="2351" y="5"/>
         </scene>
         <!--VCAddTask-->
         <scene sceneID="v3J-2Y-1Qe">
@@ -211,6 +268,25 @@
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="1717" y="881"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="j7a-CV-WTW">
+            <objects>
+                <navigationController storyboardIdentifier="RootStats" automaticallyAdjustsScrollViewInsets="NO" id="udf-2n-nU8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XSw-gD-bUk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UPD-h0-19O" kind="relationship" relationship="rootViewController" id="0YE-lq-4eR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mab-UB-xnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1725" y="5"/>
         </scene>
     </scenes>
 </document>
