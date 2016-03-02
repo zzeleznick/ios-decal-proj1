@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8te-jK-sMF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -97,25 +98,39 @@
                                 <rect key="frame" x="74" y="134" width="265" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="265" id="glX-lB-4Jz"/>
-                                    <constraint firstAttribute="height" constant="30" id="pDA-Pm-5re"/>
+                                    <constraint firstAttribute="width" secondItem="sfv-kk-LXD" secondAttribute="height" multiplier="53:6" id="QlX-dX-D1L"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-gb-5PH">
-                                <rect key="frame" x="74.5" y="189" width="265" height="30"/>
+                                <rect key="frame" x="74" y="189" width="265" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="DMQ-uc-UHu"/>
-                                    <constraint firstAttribute="width" constant="265" id="SDD-fk-9iI"/>
+                                    <constraint firstAttribute="width" secondItem="Mpm-gb-5PH" secondAttribute="height" multiplier="53:6" id="YY3-u1-X2I"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-nh-MkU">
-                                <rect key="frame" x="254" y="231" width="64" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gL4-vv-2SZ">
+                                <rect key="frame" x="74" y="251" width="48" height="30"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gL4-vv-2SZ" secondAttribute="height" multiplier="8:5" id="NbT-ON-a2f"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTaskClick:" destination="tVp-DN-lAh" eventType="touchUpInside" id="CCY-fj-OLK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-nh-MkU">
+                                <rect key="frame" x="275" y="251" width="64" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Syj-nh-MkU" secondAttribute="height" multiplier="32:15" id="Upi-NX-9Hr"/>
+                                </constraints>
                                 <state key="normal" title="Add Task">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -129,18 +144,14 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Mpm-gb-5PH" secondAttribute="centerX" id="1d3-w8-rni"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Syj-nh-MkU" secondAttribute="trailing" constant="59" id="DGc-gy-hha"/>
+                            <constraint firstItem="Syj-nh-MkU" firstAttribute="top" secondItem="Mpm-gb-5PH" secondAttribute="bottom" constant="32" id="DJL-Ic-DwB"/>
                             <constraint firstItem="Mpm-gb-5PH" firstAttribute="top" secondItem="sfv-kk-LXD" secondAttribute="bottom" constant="25" id="Jva-Ik-Tjb"/>
-                            <constraint firstItem="sfv-kk-LXD" firstAttribute="top" secondItem="vB5-Oe-5ro" secondAttribute="topMargin" constant="138" id="NxY-MA-aXr"/>
                             <constraint firstItem="sfv-kk-LXD" firstAttribute="top" secondItem="vB5-Oe-5ro" secondAttribute="topMargin" constant="134" id="RWj-77-vAm"/>
+                            <constraint firstItem="gL4-vv-2SZ" firstAttribute="top" secondItem="Mpm-gb-5PH" secondAttribute="bottom" constant="32" id="UlB-Zo-cxF"/>
                             <constraint firstAttribute="centerX" secondItem="sfv-kk-LXD" secondAttribute="centerX" id="edm-VN-I2X"/>
-                            <constraint firstItem="Mpm-gb-5PH" firstAttribute="top" secondItem="vB5-Oe-5ro" secondAttribute="topMargin" constant="193" id="vfu-BM-Ajq"/>
+                            <constraint firstItem="gL4-vv-2SZ" firstAttribute="leading" secondItem="vB5-Oe-5ro" secondAttribute="leadingMargin" constant="58" id="wqV-2M-ZS2"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="NxY-MA-aXr"/>
-                                <exclude reference="vfu-BM-Ajq"/>
-                            </mask>
-                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="KC2-6j-ON8" appends="YES" id="MfB-30-tL4"/>
                         </connections>
@@ -149,6 +160,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="addTaskButton" destination="Syj-nh-MkU" id="ywn-Up-AGs"/>
+                        <outlet property="cancelButton" destination="gL4-vv-2SZ" id="HeS-AQ-OJy"/>
                         <outlet property="txtDesc" destination="Mpm-gb-5PH" id="gt1-In-evP"/>
                         <outlet property="txtTask" destination="sfv-kk-LXD" id="8Pi-8I-l4R"/>
                     </connections>

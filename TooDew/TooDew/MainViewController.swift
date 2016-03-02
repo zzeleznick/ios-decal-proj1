@@ -45,22 +45,51 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // code
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "test")
-        cell.textLabel?.text = taskMgr.tasks[indexPath.row].name
-        cell.detailTextLabel!.text =  taskMgr.tasks[indexPath.row].desc
+        let myTask = taskMgr.tasks[indexPath.row]
+        cell.textLabel?.text = myTask.name
+        cell.detailTextLabel!.text =  myTask.desc
+        let isCompleted = myTask.completed
+        if isCompleted {
+            println("Task \(indexPath.row) is completed")
+            cell.textLabel?.text = myTask.name + " [Complete]"
+        }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        
+        // hat-tip for multi-action to
+        // http://stackoverflow.com/questions/32004557/swipe-able-table-view-cell-in-ios9-or-swift-guide-at-least
+        
+        let del = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
+            println("Delete this row: \(indexPath.row)")
+            taskMgr.deleteTask(indexPath.row)
+            self.tableTasks.reloadData()
+        }
+        
+        del.backgroundColor = UIColor.redColor()
+        
+        let complete = UITableViewRowAction(style: .Normal, title: "Complete") { action, index in
+            println("Complete Button Tapped")
+            taskMgr.completeTask(indexPath.row)
+            self.tableTasks.reloadData()
+        }
+        complete.backgroundColor = UIColor.greenColor()
+        
+        return [del, complete]
     }
     
     //UITableViewDelete
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete){
             println("Delete this row: \(indexPath.row)")
-            taskMgr.tasks.removeAtIndex(indexPath.row)
-            //table must be reloaded explicitly
-            tableTasks.reloadData()
-        }
-        if (editingStyle == UITableViewCellEditingStyle.Insert) {
-            println("Something here\(indexPath.row)")
-            //TODO: What is this?
+            taskMgr.deleteTask(indexPath.row)
+            self.tableTasks.reloadData()
         }
     }
     

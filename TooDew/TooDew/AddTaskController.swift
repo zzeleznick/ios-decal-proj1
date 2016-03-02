@@ -15,15 +15,23 @@ class AddTaskController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var txtDesc: UITextField!
     
     @IBOutlet weak var addTaskButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func addTaskClick(sender: UIButton) {
-        println("YO. I got clicked, bitch")
+        println("A task was added with text: \(txtTask.text)")
         taskMgr.addTask(txtTask.text, desc: txtDesc.text)
         self.view.endEditing(true)
         txtTask.text = ""
         txtDesc.text = ""
         goBack()
     }
+    
+    @IBAction func cancelTaskClick(sender: UIButton) {
+        println("A task was cancelled.")
+        goBack()
+    }
+    
+    
     
     @IBAction func userSwipedLeft(sender: UISwipeGestureRecognizer) {
         print("User swipedped on Name VC")
