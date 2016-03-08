@@ -18,8 +18,10 @@ class AddTaskController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBAction func addTaskClick(sender: UIButton) {
-        println("A task was added with text: \(txtTask.text)")
-        taskMgr.addTask(txtTask.text, desc: txtDesc.text)
+        print("A task was added with text: \(txtTask.text)")
+        if txtTask.text != "" {
+          taskMgr.addTask(txtTask.text!, desc: txtDesc.text!)
+        }
         self.view.endEditing(true)
         txtTask.text = ""
         txtDesc.text = ""
@@ -27,7 +29,7 @@ class AddTaskController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func cancelTaskClick(sender: UIButton) {
-        println("A task was cancelled.")
+        print("A task was cancelled.")
         goBack()
     }
     
@@ -50,7 +52,7 @@ class AddTaskController: UIViewController, UITextFieldDelegate{
     
     func goBack() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootMain")  as! UIViewController?
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootMain")  as UIViewController?
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     

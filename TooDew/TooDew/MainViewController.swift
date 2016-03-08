@@ -36,13 +36,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func goBack() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootStats")  as! UIViewController?
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootStats")  as UIViewController?
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     
     func goForward() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootAddTask")  as! UIViewController?
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootAddTask")  as UIViewController?
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     
@@ -58,11 +58,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // code
-        let now = NSDate()
+        // let now = NSDate()
         let count = taskMgr.tasks.count
         if count > 0 {
             let allTasks = taskMgr.tasks
-            for (idx, element) in enumerate(allTasks) {
+            for (idx, element) in allTasks.enumerate() {
                 let created = element.created
                 if -(created.timeIntervalSinceNow) > 60*60*24 {
                     taskMgr.deleteTask(idx)
@@ -80,7 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.detailTextLabel!.text =  myTask.desc
         let isCompleted = myTask.completed
         if isCompleted {
-            println("Task \(indexPath.row) is completed")
+            print("Task \(indexPath.row) is completed")
             cell.textLabel?.text = myTask.name + " [Complete]"
         }
         return cell
@@ -91,13 +91,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        print("Row Tapped")
+        taskMgr.completeTask(indexPath.row)
+        self.tableTasks.reloadData()
+        return indexPath
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         // hat-tip for multi-action to
         // http://stackoverflow.com/questions/32004557/swipe-able-table-view-cell-in-ios9-or-swift-guide-at-least
         
         let del = UITableViewRowAction(style: .Normal, title: "Delete") { action, index in
-            println("Delete this row: \(indexPath.row)")
+            print("Delete this row: \(indexPath.row)")
             taskMgr.deleteTask(indexPath.row)
             self.tableTasks.reloadData()
         }
@@ -105,7 +112,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         del.backgroundColor = UIColor.redColor()
         
         let complete = UITableViewRowAction(style: .Normal, title: "Complete") { action, index in
-            println("Complete Button Tapped")
+            print("Complete Button Tapped")
             taskMgr.completeTask(indexPath.row)
             self.tableTasks.reloadData()
         }
@@ -117,7 +124,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     //UITableViewDelete
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete){
-            println("Delete this row: \(indexPath.row)")
+            print("Delete this row: \(indexPath.row)")
             taskMgr.deleteTask(indexPath.row)
             self.tableTasks.reloadData()
         }

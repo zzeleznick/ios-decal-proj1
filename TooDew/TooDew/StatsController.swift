@@ -30,7 +30,7 @@ class StatsController: UIViewController{
                 count += Int(t.completed)
             }
         }
-        println("Found Count of \(count)")
+        print("Found Count of \(count)")
         numberCompleted?.text = "\(count)"
     }
     
@@ -42,7 +42,7 @@ class StatsController: UIViewController{
     
     func goForward() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootMain")  as! UIViewController?
+        let mainVC = storyboard.instantiateViewControllerWithIdentifier("RootMain")  as UIViewController?
         self.presentViewController(mainVC!, animated: true, completion: nil)
     }
     
